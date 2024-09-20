@@ -835,10 +835,15 @@ libmian main
 
 ### import匿名及别名导包方式
 
++ 导入: 包路径
+
++ 使用 包名.方法
+
 ```go
 package main
 
 import (
+    // 导入 包路径
     // "GolangStudy/5-init/lib2"   //默认,当没有调用导入包里的函数时会报错
 	// _ "GolangStudy/5-init/lib1"  //匿名
 	mylib2 "GolangStudy/5-init/lib2"  //别名
@@ -846,6 +851,8 @@ import (
 )
 
 func main() {
+    
+    // 使用 包名.方法
 	// lib1.lib1Test()
 	//lib2.Lib2Test()
 	mylib2.Lib2Test()
