@@ -370,6 +370,28 @@ Hello, World!
 
 ●[Google公布实现Go 1.5自举的计划](https://studygolang.com/articles/2419)【[英文原文地址](https://www.infoq.com/news/2015/01/golang-15-bootstrapped/)】
 
+## 六、优缺点
+
+ **go语言的优点：**
+
+　　自带gc，自动垃圾回收
+
+　　静态编译，编译好后，扔服务器直接运行
+
+　　简单的思想，没有继承，多态，类等
+
+　　丰富的库和详细的开发文档
+
+　　速度快。几乎和C一样快
+
+**go适合做什么**：
+
+　　服务端开发
+
+　　分布式系统，微服务
+
+　　云平台
+
 # **Golang语法新奇**
 
 > 注意一下每个章节和GolangStudy文件夹内容一一对应
