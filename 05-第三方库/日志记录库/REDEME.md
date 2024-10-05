@@ -1,0 +1,1 @@
+Logrus是Go（golang）的结构化logger，与标准库logger完全API兼容，
