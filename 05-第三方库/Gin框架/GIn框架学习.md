@@ -244,6 +244,7 @@ func main() {
   3、自定义日志输出文件
 
 ```go
+
 func main() {
 	router := gin.New()
 	// LoggerWithFormatter 中间件会写入日志到 gin.DefaultWriter
@@ -269,3 +270,37 @@ func main() {
 	router.Run(":8080")
 }
 ```
+
+**get请求**
+
+```
+type TMCPermitReq struct {
+	Namespace   string `form:"namespace"`
+	Username    string `form:"user_name"`
+	AccessToken string `form:"access_token"`
+}
+```
+
+```
+type TMCPermitRes struct {
+	Code      int    `json:"code" example:"0"`
+	Msg       string `json:"message,omitempty" example:"OK"`
+	IsSuccess bool   `json:"is_success"`
+}
+```
+
+**post请求**
+
+```
+type WdtTradeReq struct {
+	Username     string `json:"user_name" form:"user_name"`
+	SrcTid       string `json:"src_tid" form:"src_tid"` //原始单号
+	Sid          string `json:"sid" form:"sid"`         //旺店通账号
+	StartTime    string `json:"start_time" form:"start_time"`
+	EndTime      string `json:"end_time" form:"end_time"`
+	PageNo       int    `json:"page_no" form:"page_no"`
+	PageSize     int    `json:"page_size" form:"page_size"`
+	TargetAppKey string `json:"target_app_key" form:"target_app_key"` //旺店通奇门appkey
+}
+```
+
