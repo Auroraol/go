@@ -1,5 +1,8 @@
 #  json
 
+> 1. **JSON 编码**: 将 Go 的数据结构转换为 JSON 格式的字符串。通过 `json.Marshal` 函数实现。
+> 2. **JSON 解码**: 将 JSON 格式的字符串转换为 Go 的数据结构。通过 `json.Unmarshal` 函数实现。
+
 相关的包：
 
 ```go

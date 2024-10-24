@@ -1,5 +1,7 @@
 # mapstructure 库
 
+> 将`map`映射到结构体
+
 ## 1、基础使用
 
 安装方式：
@@ -88,6 +90,61 @@ cat: {kitty 1 Ragdoll}
 上面代码中，我们先用`json.Unmarshal`将字节流解码为`map[string]interface{}`类型。然后读取里面的`type`字段。根据`type`字段的值，再使用`mapstructure.Decode`将该 JSON 串分别解码为`Person`和`Cat`类型的值，并输出。
 
 实际上，Google Protobuf 通常也使用这种方式。在协议中添加消息 ID 或**全限定消息名**。接收方收到数据后，先读取协议 ID 或**全限定消息名**。然后调用 Protobuf 的解码方法将其解码为对应的`Message`结构。从这个角度来看，`mapstructure`也可以用于网络消息解码，**如果你不考虑性能的话**。
+
+**示例:**
+
+```go
+
+type ShopIdGray1 struct {
+	Data struct {
+		PlatUserIds map[string]bool `json:"plat_user_ids" mapstructure:"plat_user_ids"`
+		IsComplete  bool            `json:"is_complete" mapstructure:"is_complete"`
+	} `json:"data"`
+}
+
+func Test2(t *testing.T) {
+	platUserID := map[string]bool{
+		"1212231": true,
+	}
+
+	// 构建 data
+	data := map[string]interface{}{
+		"plat_user_ids": platUserID,
+		"is_complete":   false,
+	}
+
+	// 方式1
+	p1 := &ShopIdGray1{}
+	err := mapstructure.Decode(data, &p1.Data) //进行解码，使用 mapstructure 将 data 解码到 gray.Data
+	if err != nil {
+		fmt.Println("Error decoding data:", err)
+		return
+	}
+
+	fmt.Printf("Decoded p1: %+v\n", p1)
+	fmt.Printf("Decoded p1.Data: %+v\n", p1.Data)
+	fmt.Println(p1.Data.PlatUserIds["1212231"])
+
+	//方式2
+	p2 := ShopIdGray1{}
+	err = mapstructure.Decode(data, &p2.Data) //进行解码，使用 mapstructure 将 data 解码到 gray.Data
+	if err != nil {
+		return
+	}
+	fmt.Printf("Decoded p2: %+v\n", p2)
+	fmt.Printf("Decoded p2.Data: %+v\n", p2.Data)
+	fmt.Println(p2.Data.PlatUserIds["1212231"])
+}
+```
+
+```
+Decoded ShopIdGray1: &{Data:{PlatUserIds:map[1212231:true] IsComplete:false}}
+Decoded ShopIdGray1.Data: {PlatUserIds:map[1212231:true] IsComplete:false}
+true
+Decoded ShopIdGray1: {Data:{PlatUserIds:map[1212231:true] IsComplete:false}}
+Decoded ShopIdGray1.Data: {PlatUserIds:map[1212231:true] IsComplete:false}
+true
+```
 
 ## 2、详细使用
 
